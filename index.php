@@ -1,3 +1,24 @@
+<?php
+
+function generatePassword($length) {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-={}:<>?';
+    $password = '';
+    for ($i = 0; $i < $length; $i++) {
+        $password .= $chars[rand(0, strlen($chars) - 1)];
+    }
+    return $password;
+}
+
+if (isset($_GET['password'])) {
+    $length = (int) $_GET['password'];
+    if ($length < 1) {
+        echo "<h4>Errore: la lunghezza della password deve essere maggiore di 0</h4>";
+    } else {
+        $password = generatePassword($length);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +28,25 @@
     <title>PHP Strong Password Generator</title>
 </head>
 <body>
-    
+    <div class="container-fluid bg-black vh-100">
+        <div class="container h-100">
+            <div class="row pt-5">
+                <div class="col-6 offset-3 text-center text-white border border-danger p-4">
+                    <h1>PHP Strong Password Generator</h1>
+                    <h3 class="pt-1">Genera la tua password!</h3>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6 offset-3 text-center text-white border border-danger p-4">
+                    <form class="d-flex justify-content-between pb-3" action="index.php" method="get">
+                        <label for="password">Lunghezza Password</label>
+                        <input type="number" name="password" id="password" class="form-control w-25" min="1">
+                        <button type="submit" class="btn btn-primary">Genera Password</button>
+                    </form>
+                    <?php if (isset($password)) { echo "<h4>La tua password è: $password</h4>"; } ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
