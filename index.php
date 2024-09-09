@@ -29,6 +29,7 @@ require_once 'functions.php';
                         <button type="submit" class="btn btn-primary">Genera Password</button>
                     </form>
                     <?php if (isset($password)) { echo "<h4>La tua password è: $password</h4>"; } ?>
+                    <?php if ($length < 4) { echo "<h4>Errore: la lunghezza della password deve essere maggiore di 4</h4>"; } ?>
                 </div>
             </div>
         </div>
