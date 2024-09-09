@@ -12,7 +12,7 @@ function generatePassword($length) {
 if (isset($_GET['password'])) {
     $length = (int) $_GET['password'];
     if ($length < 4) {
-        
+        $error = "Errore: la lunghezza della password deve essere maggiore di 4";
     } else {
         $password = generatePassword($length);
     }
